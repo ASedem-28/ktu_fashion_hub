@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Gallery - KTU Fashion Hub{% endblock %}
+
+{% block content %}
+    
+    <section class="gallery-hero">
+        <h1>Our Gallery</h1>
+        <p>Explore our curated fashion moments and standout student projects in a stunning visual grid.</p>
+    </section>
+
+    <main class="gallery-wrapper">
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="men">Men's Wear</button>
+            <button class="filter-btn" data-category="women">Women's Wear</button>
+            <button class="filter-btn" data-category="patterns">Patterns & Textiles</button>
+        </div>
+
+        <div class="gallery-grid">
+ 
+            {% for item in fashion_items %}
+            <a href="#" class="gallery-item" data-category="{{ item.category }}" data-category-all="all">
+
+                {% thumbnail item.image "400x400" crop="center" quality=85 as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ item.title }}" loading="lazy">
+                {% endthumbnail %}
+
+                <div class="overlay">
+                    <h3>{{ item.title }}</h3>
+                    <p>by {{ item.designer_name }} <br/>
+                        {% if item.designer_contact %}
+                            {{ item.designer_contact }}
+                        {% endif %}
+                    </p>
+                </div>
+            </a>
+            {% empty %}
+                <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                    No fashion items found. Check back soon!
+                </p>
+            {% endfor %}
+
+        </div>
+    </main>
+
+
+    <!-- POPUP MODAL FOR VIEWING IMAGES -->
+     <div id="imageModal" class="modal">
+        <!-- prev button -->
+         <button class="prev-btn"><</button>
+         
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <a id="downloadBtn" class="download-icon" href="" download>
+                <i class="fas fa-download"></i>
+            </a>
+            <img id="modalImg" src="" alt="Full View" />
+            <div class="modal-description">
+              <h3 id="modalTitle">Title</h3>
+              <p id="modalDesc">Description goes here...</p>
+            </div>
+        </div>
+
+        <!-- next button -->
+         <button class="next-btn">></button>
+    </div>
+    
+{% endblock %}

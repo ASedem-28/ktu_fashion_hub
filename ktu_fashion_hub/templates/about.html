@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About Us - KTU Fashion Hub{% endblock %}
+
+{% block content %}
+    
+    <!-- ABOUT SECTION LAYOUT -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-image fade-in-up" style="animation-delay: 0.2s;">
+              <img src="{% static 'design images/bg-img-06.jpg' %}" alt="About KTU Fashion Hub">
+            </div>
+            <div class="about-content fade-in-up" style="animation-delay: 0.4s;">
+              <h2>About KTU Fashion Hub</h2>
+              <p>
+                  KTU Fashion Hub is a digital platform that celebrates emerging fashion talents by showcasing student ideas, projects, and trends — inspiring creativity and empowering the next generation of designers.
+              </p>
+              <p>
+                  Our mission is to empower fashion students by giving their creative work the visibility it deserves, while offering enthusiasts a curated gallery of emerging trends, fresh ideas, and innovative designs that push the boundaries of style.
+              </p>
+              {# Use the url tag for robust links #}
+              <a href="{% url 'contact' %}" class="cta-button">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
