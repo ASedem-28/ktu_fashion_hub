@@ -42,7 +42,7 @@
       <h3 class="fade-in-up" style="animation-delay: 0.2s;">Welcome to</h3>
       <h1 class="fade-in-up" style="animation-delay: 0.4s;">KTU <br>Fashion Hub</h1>
       <p class="fade-in-up" style="animation-delay: 0.6s;">A curated gallery of student fashion brilliance.</p>
-      <button href="{% url 'gallery' %}" type="button" class="cta-button fade-in-up" style="animation-delay: 0.8s;">Explore Styles</button>
+      <a href="{% url 'gallery' %}" class="cta-button fade-in-up" style="animation-delay: 0.8s;">Explore Styles</a>
     </div>
 
     <!-- bubbles -->
@@ -136,8 +136,12 @@
         <img src="{% static 'design images/g03.jpeg' %}" alt="Design 3">
         <div class="hover-overlay"><span>View Gallery</span><i class="fas fa-arrow-right"></i></div>
       </a>
-       <a href="{% url 'gallery' %}" class="preview-item item-4">
+      {% comment %} <a href="{% url 'gallery' %}" class="preview-item item-4">
         <img src="{% static 'design images/g04.jpeg' %}" alt="Design 4">
+        <div class="hover-overlay"><span>View Gallery</span><i class="fas fa-arrow-right"></i></div>
+      </a> {% endcomment %}
+      <a href="{% url 'gallery' %}" class="preview-item item-4">
+        <img src="{% static 'design images/g13.jpeg' %}" alt="Design 4">
         <div class="hover-overlay"><span>View Gallery</span><i class="fas fa-arrow-right"></i></div>
       </a>
     </div>
@@ -162,7 +166,7 @@
           <p class="author">Kwame – Student</p>
         </div>
         <div class="testimonial-slide">
-          <img src="{% static 'design images/ff92fb70-0884-40c4-80cb-82f25e619d59.jpeg' %}" alt="Dede" class="avatar" />
+          <img src="{% static 'design images/g3.jpeg' %}" alt="Dede" class="avatar" />
           <p class="quote">"It’s like Pinterest, but curated specifically for the vibrant, innovative world of African student fashion. Absolutely brilliant!"</p>
           <p class="author">Dede – Blogger</p>
         </div>
