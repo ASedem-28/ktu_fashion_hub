@@ -24,7 +24,7 @@
             {% for item in fashion_items %}
             <a href="#" class="gallery-item" data-category="{{ item.category }}" data-category-all="all">
 
-                {% thumbnail item.image "400x400" crop="center" quality=85 as im %}
+                {% thumbnail item.image "720x900" crop="center" quality=100 as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ item.title }}" loading="lazy">
                 {% endthumbnail %}
 
