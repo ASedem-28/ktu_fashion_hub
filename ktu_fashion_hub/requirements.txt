@@ -1,0 +1,12 @@
+asgiref==3.6.0
+Django==4.2.1
+django-appconf==1.1.0
+django-imagekit==5.0.0
+pilkit==3.0
+pillow==10.2.0
+dj-database-url==...
+gunicorn==...
+psycopg2==2.9.9
+psycopg2-binary==2.9.10
+sorl-thumbnail==12.11.0
+sqlparse==0.4.4
