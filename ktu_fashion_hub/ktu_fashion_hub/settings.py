@@ -22,28 +22,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-adqgex_#rnhu1g%eyw23_gs=5+ill#&o8jnb$ps%_v_r(vbrv#'
+SECRET_KEY = 'django-insecure-adqgex_#rnhu1g%eyw23_gs=5+ill#&o8jnb$ps%_v_r(vbrv#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1']
 
 
 # Get the secret key from an environment variable
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Get the DEBUG value from an environment variable
 # The second argument is a default value if the variable isn't set
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+# DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # Get allowed hosts from environment variable, splitting by comma
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # Render provides its hostname in this variable automatically
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -93,24 +93,24 @@ WSGI_APPLICATION = 'ktu_fashion_hub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'ktu_fashion_hub',
-#         'USER': 'postgres',
-#         'PASSWORD': 'stanislaus28..',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        # Default connection string from DATABASE_URL environment variable
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ktu_fashion_hub',
+        'USER': 'postgres',
+        'PASSWORD': 'stanislaus28..',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Default connection string from DATABASE_URL environment variable
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
 
 
 # Password validation
