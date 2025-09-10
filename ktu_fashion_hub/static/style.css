@@ -1050,14 +1050,17 @@ header .nav li a:hover::after {
     width: 100%;
     aspect-ratio: 4 / 5;
     background-color: #f0f0f0;
+    flex-shrink: 0;
     position: relative;
 }
 
 #modalMediaContainer img,
 #modalMediaContainer video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 80vh;
+    min-height: 70vh;
+    object-fit: contain;
     display: block;
 }
 
