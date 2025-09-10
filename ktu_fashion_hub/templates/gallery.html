@@ -22,7 +22,6 @@
         <div class="gallery-grid">
  
             {% for item in fashion_items %}
-                {# ADDED: Check if a media file actually exists for this item #}
                 {% if item.media_file %}
 
                     <a href="#" class="gallery-item" 
@@ -53,7 +52,7 @@
                         </div>
                     </a>
 
-                {% endif %} {# End of the check for media_file #}
+                {% endif %}
             {% empty %}
                 <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
                     No fashion items found. Check back soon!
@@ -63,7 +62,7 @@
         </div>
     </main>
 
-    <!-- CHANGED: POPUP MODAL to be more flexible -->
+    <!-- POPUP MODAL -->
     <div id="imageModal" class="modal media-modal">
         <button class="prev-btn"><i class="fa-solid fa-angle-left"></i></button>
          
@@ -72,8 +71,7 @@
             <a id="downloadBtn" class="download-icon" href="" download>
                 <i class="fas fa-download"></i>
             </a>
-            
-            {# This container will be filled by JavaScript #}
+
             <div id="modalMediaContainer"></div>
 
             <div class="modal-description">

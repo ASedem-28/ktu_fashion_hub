@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{# This block sets the unique title for the contact page #}
 {% block title %}Contact Us - KTU Fashion Hub{% endblock %}
 
 {% block content %}
@@ -12,7 +11,7 @@
             <h2 class="section-title">Get in Touch</h2>
             <p style="text-align: center; color: #4a4a6a; margin-top: -1.5rem; margin-bottom: 2rem;">Have a question or want to collaborate? Send us a message!</p>
     
-            <!-- FORM NOW POINTS TO YOUR FORMSPREE ENDPOINT -->
+            <!-- ADDING FORMSPREE ENDPOINT -->
             <form id="contact-form" class="contact-form" action="https://formspree.io/f/mldwzlaz" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>

@@ -1,4 +1,3 @@
-// Waiting for the entire page to load before running any scripts
 document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================================
@@ -143,16 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(nextSlide, 7000); 
     }
 
+
     // ==========================================================
-    //          NEWSLETTER FORM SUBMISSION for footer
-    // ==========================================================
-    // ==========================================================
-    // AJAX NEWSLETTER FORM SUBMISSION (Corrected)
+    // AJAX NEWSLETTER FORM SUBMISSION for footer
     // ==========================================================
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default page reload
+            e.preventDefault();
 
             const form = e.target;
             const data = new FormData(form);
@@ -203,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Show a "sending" message
             statusDiv.innerHTML = "Sending...";
-            statusDiv.className = 'form-status'; // Reset classes
+            statusDiv.className = 'form-status';
             statusDiv.style.display = 'block';
             submitButton.disabled = true;
 
@@ -247,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('.hero');
     if (hero && typeof heroImagePaths !== 'undefined' && heroImagePaths.length > 0) {
         let currIndex = 0;
-        heroImagePaths.forEach(src => { (new Image()).src = src; }); // Preload images
+        heroImagePaths.forEach(src => { (new Image()).src = src; });
         hero.style.backgroundImage = `url('${heroImagePaths[currIndex]}')`;
         setInterval(() => {
             currIndex = (currIndex + 1) % heroImagePaths.length;

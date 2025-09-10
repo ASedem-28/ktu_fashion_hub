@@ -34,7 +34,6 @@ class FashionItem(models.Model):
     
     @property
     def is_image(self):
-        # Assumes if it's not a video, it's an image for simplicity.
         return not self.is_video
 
     def __str__(self):
