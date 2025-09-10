@@ -88,3 +88,9 @@ def about_page(request):
 
 def contact_page(request):
     return render(request, 'contact.html')
+
+def privacy_policy_page(request):
+    return render(request, 'privacy_policy.html')
+
+def terms_of_use_page(request):
+    return render(request, 'terms_of_use.html')

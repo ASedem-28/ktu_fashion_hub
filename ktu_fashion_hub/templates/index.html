@@ -18,14 +18,14 @@
   </div>
   
   <!-- HERO/HEADER SECTION -->
-  <section class="hero">
+  <section class="hero page-content">
     <header>
       <div class="logo">
         <img src="{% static 'design images/logo/ktu-logo.png' %}" alt="">
         <span>KTU-FH</span>
       </div>
   
-      <nav class="nav">
+      <nav class="nav main-nav">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'gallery' %}">Gallery</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
@@ -62,7 +62,7 @@
   </section>
 
   <!-- FEATURED DESIGNERS SECTION -->
-  <section class="featured-section">
+  <section class="featured-section  page-content">
     <h2 class="section-title">Top Designers</h2>
 
     <div class="card-grid">
@@ -203,10 +203,10 @@
 
       <div class="footer-links">
         <h4>Explore</h4>
-        <a href="./about.html">About</a>
-        <a href="./contact.html">Contact</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
+        <a href="{% url "about" %}">About</a>
+        <a href="{% url "contact" %}">Contact</a>
+        <a href="{% url "privacy_policy" %}">Privacy Policy</a>
+        <a href="{% url "terms_of_use" %}">Terms of Use</a>
       </div>
 
       <div class="footer-newsletter">

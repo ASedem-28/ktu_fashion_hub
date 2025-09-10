@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //                 RESPONSIVE NAVIGATION  
     // ==========================================================
     const menuIcon = document.getElementById('menu');
-    const mainNav = document.querySelector('.main-nav');
+    const mainNav = document.querySelector('header .main-nav, .main-header .main-nav');
 
     if (menuIcon && mainNav) {
         menuIcon.addEventListener('click', () => {
