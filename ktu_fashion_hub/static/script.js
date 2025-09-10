@@ -1,8 +1,26 @@
 // Waiting for the entire page to load before running any scripts
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // ==========================================================
+    //                 RESPONSIVE NAVIGATION  
+    // ==========================================================
+    const menuIcon = document.getElementById('menu');
+    const mainNav = document.querySelector('.main-nav');
+
+    if (menuIcon && mainNav) {
+        menuIcon.addEventListener('click', () => {
+            mainNav.classList.toggle('is-active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menuIcon.contains(e.target) && !mainNav.contains(e.target)) {
+                mainNav.classList.remove('is-active');
+            }
+        });
+    }
 
     // ==========================================================
-    // ENHANCED GLOBAL SEARCH LOGIC
+    //                      GLOBAL SEARCH 
     // ==========================================================
     const searchForms = document.querySelectorAll('.search-form');
     
@@ -12,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!searchInput || !resultsContainer) return;
 
-        // --- NEW: Function to show initial recommendations ---
+        // Function to show initial recommendation
         const showInitialRecommendations = async () => {
             try {
                 const response = await fetch('/initial-search-recommendations/');
@@ -20,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 resultsContainer.innerHTML = ''; // Clear previous results
                 if (recommendations.length > 0) {
-                    // Add a small title to indicate these are recommendations
+                    // Add title to indicate these are recommendations
                     const title = document.createElement('div');
-                    title.className = 'search-results-title'; // For optional styling
+                    title.className = 'search-results-title';
                     title.textContent = 'Trending Searches';
                     resultsContainer.appendChild(title);
 
@@ -39,15 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         
-        // --- NEW: Event listener for when the user clicks INTO the search bar ---
+        // Event listener for when the user clicks INTO the search bar
         searchInput.addEventListener('focus', () => {
-            // Only show recommendations if the user hasn't typed anything yet
+            // Show recommendation if nothing is typed yet
             if (searchInput.value.trim().length === 0) {
                 showInitialRecommendations();
             }
         });
 
-        // --- Autocomplete listener (as you type) ---
+        // Autocomplete listener
         searchInput.addEventListener('input', async (e) => {
             const term = e.target.value.trim();
 
@@ -83,19 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // --- Hide suggestions when clicking outside ---
+        // Hide suggestions when clicking outside
         document.addEventListener('click', (e) => {
             if (!form.contains(e.target)) {
                 resultsContainer.style.display = 'none';
             }
         });
-        
-        // Form submission (Enter key) is handled by the form's default action.
+
     });
 
 
     // ==========================================================
-    // TESTIMONIAL CAROUSEL LOGIC (Applies to index.html)
+    //          TESTIMONIAL CAROUSEL for index.html
     // ==========================================================
     const carousel = document.getElementById('testimonial-carousel');
     if (carousel) {
@@ -127,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // NEWSLETTER FORM SUBMISSION (Applies to all pages with a footer)
+    //          NEWSLETTER FORM SUBMISSION for footer
     // ==========================================================
     const newsletterForm = document.getElementById('newsletter-form');
     const contactForm = document.querySelector('contact-form')
@@ -155,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // HERO IMAGE SLIDER (Applies to index.html)
+    //            HERO IMAGE SLIDER for index.html
     // ==========================================================
     const hero = document.querySelector('.hero');
     if (hero && typeof heroImagePaths !== 'undefined' && heroImagePaths.length > 0) {
@@ -169,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // GALLERY PAGE LOGIC (Filter, Search, and Modal)
+    //          GALLERY PAGE (Filter, Search, and Modal)
     // ==========================================================
     const galleryGrid = document.querySelector('.gallery-grid');
     if (galleryGrid) {
@@ -178,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search');
         const modal = document.getElementById("imageModal");
 
-        // --- FILTER LOGIC ---
+        // FILTER LOGIC 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => b.classList.remove('active'));
@@ -199,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // --- SEARCH LOGIC ---
+        // SEARCH LOGIC
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
@@ -220,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- MODAL LOGIC (UPDATED FOR VIDEO/IMAGE) ---
+        //  MODAL LOGIC FOR VIDEO/IMAGE
         const mediaContainer = document.getElementById("modalMediaContainer");
         const modalTitle = document.getElementById("modalTitle");
         const modalDesc = document.getElementById("modalDesc");

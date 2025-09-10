@@ -1397,3 +1397,86 @@ header .nav li a:hover::after {
         border-radius: 1rem;
     }
 }
+
+
+
+
+/* =========================================================== */
+/* ========================================================== */
+/*           NEW: RESPONSIVE HEADER & NAVIGATION STYLES      */
+/* ======================================================== */
+
+/* --- Default Mobile Styles --- */
+.menu-icon {
+    display: block; /* Show the icon on mobile */
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333; /* Adjust color as needed */
+    padding: 0.5rem;
+}
+
+.main-nav {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 100%; /* Position it right below the header */
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 1.5rem 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 999;
+
+    /* Initially hidden with a smooth transition */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.main-nav.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.main-nav li a {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+}
+
+/* On mobile, ensure the header lays out correctly */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Needed for the absolute-positioned nav */
+}
+
+/* --- Tablet & Desktop Styles (Screen width 768px and up) --- */
+@media (min-width: 768px) {
+    .menu-icon {
+        display: none; /* Hide the icon on desktop */
+    }
+
+    .main-nav {
+        display: flex; /* Show the nav links */
+        flex-direction: row; /* Align links horizontally */
+        position: static; /* Remove absolute positioning */
+        width: auto;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+        
+        /* Make sure it's always visible on desktop */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .main-nav li a {
+        font-size: 1rem; /* Reset font size for desktop */
+    }
+}
