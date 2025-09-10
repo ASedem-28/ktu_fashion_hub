@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Message Sent - KTU Fashion Hub{% endblock %}
+
+{% block content %}
+<main class="page-content" style="text-align: center; padding: 6rem 2rem;">
+    <div class="contact-container">
+        <h1 class="section-title">Thank You!</h1>
+        <p style="font-size: 1.2rem; color: #4a4a6a;">Your message has been sent successfully. We'll get back to you shortly.</p>
+        <br>
+        <a href="{% url 'home' %}" class="cta-button">Return to Homepage</a>
+    </div>
+</main>
+{% endblock %}

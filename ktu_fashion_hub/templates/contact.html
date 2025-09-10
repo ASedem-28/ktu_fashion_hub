@@ -12,13 +12,15 @@
             <h2 class="section-title">Get in Touch</h2>
             <p style="text-align: center; color: #4a4a6a; margin-top: -1.5rem; margin-bottom: 2rem;">Have a question or want to collaborate? Send us a message!</p>
     
-            <form class="contact-form" method="POST">
-              {% csrf_token %}
+            <!-- FORM NOW POINTS TO YOUR FORMSPREE ENDPOINT -->
+            <form id="contact-form" class="contact-form" action="https://formspree.io/f/mldwzlaz" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                 <button type="submit" class="cta-button">Send Message</button>
             </form>
+
+            <div id="form-status" class="form-status"></div>
 
             <div class="contact-info">
                 <p><strong>Email:</strong> fashionhub@ktu.edu.gh</p>

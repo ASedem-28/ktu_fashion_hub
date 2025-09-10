@@ -146,28 +146,98 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     //          NEWSLETTER FORM SUBMISSION for footer
     // ==========================================================
+    // ==========================================================
+    // AJAX NEWSLETTER FORM SUBMISSION (Corrected)
+    // ==========================================================
     const newsletterForm = document.getElementById('newsletter-form');
-    const contactForm = document.querySelector('contact-form')
-    if (newsletterForm || contactForm) {
-        newsletterForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default page reload
+
             const form = e.target;
+            const data = new FormData(form);
             const messageEl = document.getElementById('form-message');
-            
+            const submitButton = form.querySelector('button[type="submit"]');
+
             messageEl.textContent = "Subscribing...";
             messageEl.style.color = "#a0a0c0";
-        
-            setTimeout(() => {
-                const isSuccess = Math.random() > 0.2;
-                if (isSuccess) {
-                    form.reset();
-                    messageEl.textContent = "Thanks for subscribing!";
-                    messageEl.style.color = "#90ee90";
-                } else {
-                    messageEl.textContent = "Oops! Something went wrong.";
-                    messageEl.style.color = "#ff6666";
+            submitButton.disabled = true;
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            }, 1000);
+            }).then(response => {
+                if (response.ok) {
+                    messageEl.textContent = "Thanks for subscribing!";
+                    messageEl.style.color = "#90ee90"; // Green for success
+                    form.reset();
+                    submitButton.disabled = false;
+                } else {
+                    messageEl.innerHTML = "Oops! Something went wrong.";
+                    messageEl.style.color = "#ff6666"; // Red for error
+                    submitButton.disabled = false;
+                }
+            }).catch(error => {
+                messageEl.innerHTML = "Oops! A network error occurred.";
+                messageEl.style.color = "#ff6666";
+                submitButton.disabled = false;
+            });
+        });
+    }
+
+    // ==========================================================
+    // AJAX CONTACT FORM SUBMISSION
+    // ==========================================================
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default page reload
+            
+            const form = e.target;
+            const data = new FormData(form);
+            const statusDiv = document.getElementById('form-status');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Show a "sending" message
+            statusDiv.innerHTML = "Sending...";
+            statusDiv.className = 'form-status'; // Reset classes
+            statusDiv.style.display = 'block';
+            submitButton.disabled = true;
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Success!
+                    statusDiv.innerHTML = "Thanks for your message! We'll get back to you shortly.";
+                    statusDiv.classList.add('success');
+                    form.reset();
+                    submitButton.disabled = false;
+                } else {
+                    // Handle server errors
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            statusDiv.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            statusDiv.innerHTML = "Oops! There was a problem submitting your form.";
+                        }
+                        statusDiv.classList.add('error');
+                        submitButton.disabled = false;
+                    })
+                }
+            }).catch(error => {
+                // Handle network errors
+                statusDiv.innerHTML = "Oops! There was a network error. Please try again.";
+                statusDiv.classList.add('error');
+                submitButton.disabled = false;
+            });
         });
     }
 

@@ -1280,6 +1280,28 @@ header .nav li a:hover::after {
 }
 
 
+
+/* NEW: FORM STATUS MESSAGE STYLES */
+.form-status {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    display: none;
+}
+.form-status.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+.form-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
+
+
+
 /*  LEGAL PAGE STYLES  */
 .legal-page-container {
   max-width: 800px;
