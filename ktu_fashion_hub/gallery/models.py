@@ -1,9 +1,7 @@
+import os
 from django.db import models
 
-# Create your models here.
-
 class FashionItem(models.Model):
-    # Choices for the category filter, matching your frontend buttons
     CATEGORY_CHOICES = [
         ('men', "Men's Fashion"),
         ('women', "Women's Fashion"),
@@ -18,12 +16,26 @@ class FashionItem(models.Model):
         blank=True, 
         help_text="Optional: Email, social media handle, or website."
     )
-    # The 'upload_to' argument specifies a subdirectory within MEDIA_ROOT
-    image = models.ImageField(upload_to='fashion_gallery/')
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='women')
+
+    media_file = models.FileField(
+        upload_to='fashion_gallery/',
+        help_text="Upload an image (jpg, png, etc.) or a video (mp4, mov, etc.)"
+    )
     
-    # Performance tip: Adding an index to a frequently filtered field can speed up queries.
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='women')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    @property
+    def is_video(self):
+        video_extensions = ['.mp4', '.mov', '.avi', '.wmv', '.mkv']
+        file_extension = os.path.splitext(self.media_file.name)[1].lower()
+        return file_extension in video_extensions
+
+    
+    @property
+    def is_image(self):
+        # Assumes if it's not a video, it's an image for simplicity.
+        return not self.is_video
 
     def __str__(self):
         return f"{self.title} by {self.designer_name}"

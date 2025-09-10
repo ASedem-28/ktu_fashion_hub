@@ -22,21 +22,38 @@
         <div class="gallery-grid">
  
             {% for item in fashion_items %}
-            <a href="#" class="gallery-item" data-category="{{ item.category }}" data-category-all="all">
+                {# ADDED: Check if a media file actually exists for this item #}
+                {% if item.media_file %}
 
-                {% thumbnail item.image "720x900" crop="center" quality=100 as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ item.title }}" loading="lazy">
-                {% endthumbnail %}
+                    <a href="#" class="gallery-item" 
+                    data-category="{{ item.category }}" 
+                    data-media-url="{{ item.media_file.url }}"
+                    data-media-type="{% if item.is_video %}video{% else %}image{% endif %}"
+                    data-title="{{ item.title }}"
+                    data-description="by {{ item.designer_name }}{% if item.designer_contact %} | {{ item.designer_contact }}{% endif %}">
 
-                <div class="overlay">
-                    <h3>{{ item.title }}</h3>
-                    <p>by {{ item.designer_name }} <br/>
-                        {% if item.designer_contact %}
-                            {{ item.designer_contact }}
+                        {% if item.is_video %}
+                            <video class="gallery-video" autoplay loop muted playsinline>
+                                <source src="{{ item.media_file.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% elif item.is_image %}
+                            {% thumbnail item.media_file "720x900" crop="center" quality=100 as im %}
+                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ item.title }}" loading="lazy">
+                            {% endthumbnail %}
                         {% endif %}
-                    </p>
-                </div>
-            </a>
+
+                        <div class="overlay">
+                            <h3>{{ item.title }}</h3>
+                            <p>by {{ item.designer_name }} <br/>
+                                {% if item.designer_contact %}
+                                    {{ item.designer_contact }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </a>
+
+                {% endif %} {# End of the check for media_file #}
             {% empty %}
                 <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
                     No fashion items found. Check back soon!
@@ -46,26 +63,26 @@
         </div>
     </main>
 
-
-    <!-- POPUP MODAL FOR VIEWING IMAGES -->
-     <div id="imageModal" class="modal">
-        <!-- prev button -->
-         <button class="prev-btn"><</button>
+    <!-- CHANGED: POPUP MODAL to be more flexible -->
+    <div id="imageModal" class="modal media-modal">
+        <button class="prev-btn"><i class="fa-solid fa-angle-left"></i></button>
          
         <div class="modal-content">
             <span class="close-btn">×</span>
             <a id="downloadBtn" class="download-icon" href="" download>
                 <i class="fas fa-download"></i>
             </a>
-            <img id="modalImg" src="" alt="Full View" />
+            
+            {# This container will be filled by JavaScript #}
+            <div id="modalMediaContainer"></div>
+
             <div class="modal-description">
               <h3 id="modalTitle">Title</h3>
               <p id="modalDesc">Description goes here...</p>
             </div>
         </div>
 
-        <!-- next button -->
-         <button class="next-btn">></button>
+        <button class="next-btn"><i class="fa-solid fa-angle-right"></i></button>
     </div>
     
 {% endblock %}

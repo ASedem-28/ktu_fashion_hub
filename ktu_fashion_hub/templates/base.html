@@ -28,10 +28,12 @@
             <li><a href="{% url 'contact' %}">Contact</a></li>      
       </nav>
   
-      <div class="search">
-        <i class="fas fa-search search-icon"></i>
-        <input type="search" name="search" id="search" placeholder="Search styles...">
-      </div>
+      <form class="search-form" action="{% url 'gallery' %}" method="GET">
+          <div class="search">
+              <input type="search" name="q" id="search" placeholder="Search designs or designers..." autocomplete="off">
+              <div id="search-results-list" class="search-results"></div>
+          </div>
+      </form>
     </header>
     
     <main class="content-wrapper">
